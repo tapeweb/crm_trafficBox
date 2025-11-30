@@ -1,15 +1,20 @@
-@use "../../variables.scss" as *;
+@use "../../variables" as *;
 
-.logo {
-  font-size: 2rem;
-  font-weight: bold;
-}
+.LogoStructure {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .FirstPartLogotype {
+    color: $text-color;
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+  }
 
-.traffic {
-  color: $text-color;
-}
-
-.box {
-  color: $primary-color;
-  padding: 0.001rem;
+  .SecondPartLogotype {
+    color: $primary-color;
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+  }
 }

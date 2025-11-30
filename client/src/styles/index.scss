@@ -1,38 +1,56 @@
-@use './variables' as *;
+// index.scss
 
+@use './variables' as *;
+@use 'sass:color' as color;
+
+// ==========================
+// GLOBAL RESET
+// ==========================
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-weight: 500;
-  font-family: 'Roboto', monospace, sans-serif;
-  line-height: 1.5;
+  font-weight: $font-weight-regular;
+  font-family: $font-family-base;
+  line-height: $line-height-base;
 }
 
+// ==========================
+// BODY & HTML
+// ==========================
 html, body {
   width: 100%;
   height: 100%;
   background: #121212;
-  color: #fff;
+  color: $text-color-light;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
 
+// ==========================
+// SELECTION
+// ==========================
 ::selection {
   background: $primary-color;
-  color: #fff;
+  color: $text-color-light;
 }
 
+// ==========================
+// TYPOGRAPHY
+// ==========================
 h1, h2, h3, h4, h5, h6, p {
-  font-weight: 700;
+  font-weight: $font-weight-bold;
   color: $text-color;
-  letter-spacing: 0.1rem;
+  letter-spacing: $letter-spacing-base;
 }
 
+// ==========================
+// LINKS & BUTTONS
+// ==========================
 a, button {
   border: none;
   color: $button-color-text;
-  transition: color 0.3s ease, background 0.3s ease;
+  transition: color $transition-speed ease, background $transition-speed ease;
 }
 
 a {
@@ -44,21 +62,45 @@ a {
   }
 }
 
+// ==========================
+// SCROLLBAR
+// ==========================
 ::-webkit-scrollbar {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: $scrollbar-width;
+  height: $scrollbar-height;
 }
 
 ::-webkit-scrollbar-track {
-  background: $box-bg;
+  background: $scrollbar-track-bg;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: lighten($primary-color, 10%);
-  border-radius: 0.5rem;
-  border: 0.1rem solid $box-bg;
+  background: $scrollbar-thumb-bg;
+  border-radius: $scrollbar-thumb-radius;
+  border: $scrollbar-thumb-border;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: $primary-color;
+  background-color: $scrollbar-thumb-hover-bg;
+}
+
+// ==========================
+// MEDIA QUERIES
+// ==========================
+@media (max-width: $laptop-width) {
+  body {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: $tablet-width) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: $phone-width) {
+  body {
+    font-size: 0.85rem;
+  }
 }

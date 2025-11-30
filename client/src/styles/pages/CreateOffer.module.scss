@@ -7,14 +7,14 @@
   justify-content: center;
   text-align: center;
   height: 100vh;
-  background: $bg-color;
+  background: $background;
   .createOfferBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1vh;
-    background: $box-bg;
+    background: $background-container;
     box-shadow: 0 0 2vh $shadow-color;
     border-radius: 0.2rem;
     .inputsBox {

@@ -4,12 +4,12 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: $bg-color;
+  background: $background;
   main {
     flex: 1;
     padding: 1rem 1vh;
     transition: transform 0.3s ease;
-    background: $box-bg;
+    background: $background-container;
   }
 }
 

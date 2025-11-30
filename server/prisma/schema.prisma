@@ -1,37 +1,68 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
+// ======================================
+// DATASOURCE & GENERATOR
+// ======================================
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id         Int      @id @default(autoincrement())
-  token      String   @db.VarChar(255)
-  name       String   @db.VarChar(64)
-  surname    String   @db.VarChar(64)
-  password   String   @db.VarChar(255)
-  gender     String   @db.VarChar(32)
-  email      String   @unique @db.VarChar(255)
-  age        Int
-  role       String   @default("User") @db.VarChar(64)
-  balance    Int      @default(0)
-  created_at DateTime @default(now()) @db.Timestamp(0)
-  updated_at DateTime @updatedAt @db.Timestamp(0)
-
-  offers offers[]
+generator client {
+  provider = "prisma-client-js"
 }
 
-model offers {
-  id          Int      @id @default(autoincrement())
+// ======================================
+// ENUMS
+// ======================================
+enum Gender {
+  Male
+  Female
+  Other
+}
+
+enum Role {
+  Admin
+  User
+  Guest
+  Developer
+  Banned
+  VIP @map("V.I.P")
+}
+
+// ======================================
+// USERS MODEL
+// ======================================
+model User {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  name      String
+  surname   String
+  password  String
+  gender    Gender
+  email     String   @unique
+  age       Int
+  role      Role     @default(User)
+  balance   Int      @default(0)
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @default(now()) @updatedAt @map("updatedAt")
+
+  offers Offer[]
+
+  @@map("users")
+}
+
+// ======================================
+// OFFERS MODEL
+// ======================================
+model Offer {
+  id          Int     @id @default(autoincrement())
   uid         Int
-  name        String   @db.VarChar(64)
-  description String?  @db.VarChar(64)
+  name        String
+  description String?
   price       Int
   value       Int
-  created_at  DateTime @default(now()) @db.Timestamp(0)
 
-  users users @relation(fields: [uid], references: [id], onDelete: Cascade)
+  user User @relation(fields: [uid], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([uid])
+  @@map("offers")
 }

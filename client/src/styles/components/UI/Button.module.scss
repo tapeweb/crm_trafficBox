@@ -1,4 +1,5 @@
 @use '../../variables.scss' as *;
+@use 'sass:color' as color;
 
 .button {
   display: inline-flex;
@@ -16,14 +17,14 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, $primary-color, darken($primary-color, 10%));
+  background: linear-gradient(135deg, $primary-color, color.adjust($primary-color, $lightness: 10%));
   color: white;
   min-width: 8.75rem;
 
   &:hover {
     transform: translateY(-0.125rem);
     box-shadow: 0 0.625rem 1.5625rem rgba($primary-color, 0.3);
-    background: linear-gradient(135deg, lighten($primary-color, 5%), $primary-color);
+    background: linear-gradient(135deg, color.adjust($primary-color, $lightness: 5%), $primary-color);
   }
 
   &:active {
@@ -40,10 +41,10 @@
 }
 
 .primary {
-  background: linear-gradient(135deg, $primary-color, darken($primary-color, 10%));
+  background: linear-gradient(135deg, $primary-color, color.adjust($primary-color, $lightness: -10%));
 
   &:hover {
-    background: linear-gradient(135deg, lighten($primary-color, 5%), $primary-color);
+    background: linear-gradient(135deg, color.adjust($primary-color, $lightness: 5%), $primary-color);
     box-shadow: 0 0.625rem 1.5625rem rgba($primary-color, 0.3);
   }
 }
@@ -183,7 +184,6 @@
     width: 1rem;
     height: 1rem;
     border: 0.125rem solid transparent;
-    border-top: 0.125rem solid currentColor;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-left: 0.5rem;

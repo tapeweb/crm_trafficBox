@@ -1,15 +1,61 @@
+// variables.scss
+
 @use 'sass:color';
 
-$phone-width: 26.5625em;
-$tablet-width: 48em;
-$laptop-width: 62em;
+// ==========================
+// COLORS
+// ==========================
 
+// Primary & Secondary
 $primary-color: #ff0000;
 $secondary-color: #0099dd;
 $primary-color-hover: color.adjust($primary-color, $lightness: 10%);
-$bg-color: #f9f9fb;
+
+// Text
 $text-color: #333;
+$text-color-light: #fff;
+
+// Backgrounds
+$background: #f9f9fb;
+$background-container: #fff;
+
+// Buttons
 $button-color-text: #fff;
-$box-bg: #fff;
+
+// Shadows & accents
 $shadow-color: rgba(0, 0, 0, 0.08);
 $accent-color: #ff6600;
+
+// ==========================
+// BREAKPOINTS
+// ==========================
+$phone-width: 26.5625em; // ~425px
+$tablet-width: 48em;      // ~768px
+$laptop-width: 62em;      // ~992px
+$desktop-width: 75em;     // ~1200px
+
+// ==========================
+// TYPOGRAPHY
+// ==========================
+$font-family-base: sans-serif;
+$font-weight-regular: 500;
+$font-weight-bold: 700;
+$line-height-base: 1.5;
+$letter-spacing-base: 0.1rem;
+
+// ==========================
+// SCROLLBAR
+// ==========================
+$scrollbar-width: 0.6rem;
+$scrollbar-height: 0.6rem;
+$scrollbar-track-bg: $background-container;
+$scrollbar-thumb-bg: color.adjust($primary-color, $lightness: 10%);
+$scrollbar-thumb-hover-bg: $primary-color;
+$scrollbar-thumb-radius: 0.5rem;
+$scrollbar-thumb-border: 0.1rem solid $background-container;
+
+// ==========================
+// OTHER SETTINGS
+// ==========================
+$border-radius-base: 0.5rem;
+$transition-speed: 0.3s;

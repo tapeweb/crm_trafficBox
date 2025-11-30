@@ -12,7 +12,7 @@ app.use(corsMiddleware);
 app.use(express.json());
 app.use(loggerMiddleware);
 app.use(express.urlencoded({ extended: true }));
-app.use(globalLimiter)
+app.use(globalLimiter) 
 
 app.use("/", userRoutes);
 app.use("/", offerRouter);

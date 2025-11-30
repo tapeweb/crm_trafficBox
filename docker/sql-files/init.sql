@@ -1,24 +1,61 @@
+-- ======================================
+-- USERS TABLE (PostgreSQL-optimized)
+-- ======================================
 CREATE TABLE IF NOT EXISTS users (
-	id SERIAL PRIMARY KEY,
-	token VARCHAR(255) NOT NULL,
-	name VARCHAR(64) NOT NULL,
-	surname VARCHAR(64) NOT NULL,
-	password VARCHAR(255) NOT NULL,
-	gender VARCHAR(32) NOT NULL,
-	email VARCHAR(255) NOT NULL,
-	age INT NOT NULL CHECK (age >= 16),
-	role VARCHAR(64) DEFAULT 'User',
-	balance INT DEFAULT 0,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    token TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    password TEXT NOT NULL,
+
+    gender TEXT NOT NULL
+        CHECK (gender in ('Male', 'Female', 'Other')),
+
+    email TEXT NOT NULL UNIQUE,
+    age INT NOT NULL CHECK (age >= 16),
+
+    role TEXT NOT NULL DEFAULT 'User'
+        CHECK (role in ('User', 'Admin', 'Moderator')),
+
+    balance INT NOT NULL DEFAULT 0 CHECK (balance >= 0),
+
+    createdAt TIMESTAMP NOT NULL DEFAULT now(),
+    updatedAt TIMESTAMP NOT NULL DEFAULT now()
 );
 
+-- Auto-update "updatedAt" on UPDATE
+CREATE OR REPLACE FUNCTION setUsersUpdatedAt()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updatedAt = now();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER triggerUsersUpdatedAt
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE setUsersUpdatedAt();
+
+-- ======================================
+-- OFFERS TABLE (PostgreSQL-optimized)
+-- ======================================
+
 CREATE TABLE IF NOT EXISTS offers (
-	id SERIAL PRIMARY KEY,
-	uid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-	name VARCHAR(64) NOT NULL,
-	description VARCHAR(64),
-	price INT NOT NULL,
-	value INT NOT NULL,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    uid INT NOT NULL REFERENCES users(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    name TEXT NOT NULL,
+    description TEXT,
+
+    price INT NOT NULL CHECK(price >= 0),
+    value INT NOT NULL CHECK(value >= 0),
+
+    createdAt TIMESTAMP NOT NULL DEFAULT now()
 );
+
+CREATE INDEX IF NOT EXISTS indexOffersUID ON offers(uid);

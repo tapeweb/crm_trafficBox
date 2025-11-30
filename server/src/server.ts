@@ -4,7 +4,7 @@ import { connectDB } from "./config/database";
 const startServer = async () => {
   await connectDB();
   app.listen(process.env.VITE_SERVER_PORT, () => {
-    console.log(`Server started on ${process.env.VITE_SERVER_API_URL}`);
+    console.log(`Server started on ${process.env.VITE_SERVER_API_URL}.`);
   });
 };
 

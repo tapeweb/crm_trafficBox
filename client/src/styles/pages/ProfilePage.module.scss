@@ -6,12 +6,12 @@
   justify-content: space-between;
   height: 100vh;
   width: 100vw;
-  background: $bg-color;
+  background: $background;
   .ContentBox {
     display: flex;
     flex-direction: row;
     padding: 1vh 1vw;
-    background: $box-bg;
+    background: $background-container;
     color: $text-color;
     border-radius: 1vh;
     gap: 1rem;

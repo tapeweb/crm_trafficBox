@@ -1,5 +1,9 @@
-import crypto from "crypto"
+import { randomBytes } from "node:crypto";
 
-export const generateToken = async (size: number, encoding: any) => {
-  return crypto.randomBytes(size).toString(encoding);
+export const generateTokenUtils = (
+    size = 32,
+    encoding: BufferEncoding = "hex"
+): string => {
+    const buffer = randomBytes(size);
+    return buffer.toString(encoding);
 }

@@ -6,12 +6,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: $box-bg;
+  background: $background-container;
   .SignInBox {
     display: flex;
     flex-direction: row;
     padding: 0 0 0 1rem;
-    background: $box-bg;
+    background: $background-container;
     border-radius: 1rem;
     box-shadow: 0 0 2vh $shadow-color;
     gap: 1rem;

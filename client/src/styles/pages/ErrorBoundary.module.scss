@@ -7,11 +7,11 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(135deg, $box-bg, color.adjust($box-bg, $lightness: -10%));
+  background: linear-gradient(135deg, $background-container, color.adjust($background-container, $lightness: -10%));
   padding: 2rem;
 
   .ErrorBox {
-    background-color: color.adjust($box-bg, $lightness: 3%);
+    background-color: color.adjust($background-container, $lightness: 3%);
     padding: 2.5rem;
     border-radius: 1rem;
     text-align: center;

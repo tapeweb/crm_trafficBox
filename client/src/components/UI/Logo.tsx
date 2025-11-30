@@ -4,12 +4,12 @@ import styles from "../../styles/components/UI/Logo.module.scss"
 export function Logo() {
   return (
     <Fragment>
-      <div className={styles.logo}>
-        <span className={styles.traffic}>
-          Brain
+      <div className={styles.LogoStructure}>
+        <span className={styles.FirstPartLogotype}>
+          B
         </span>
-        <span className={styles.box}>
-          Axis
+        <span className={styles.SecondPartLogotype}>
+          A
         </span>
       </div>
     </Fragment>

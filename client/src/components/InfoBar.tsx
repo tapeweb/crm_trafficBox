@@ -8,11 +8,11 @@ export function InfoBar() {
       <section className={styles.infoBarSection}>
         <div className={styles.mainDevelopersBox}>
           <h1>
-            Main Developer:{" "}
+            Main Developer:
             <Button content="Tape" link="https://github.com/TapeWeb" isAnimated={true} size={"small"} />
           </h1>
           <h1>
-            Project Idea:{" "}
+            Project Idea:
             <Button content="NS13" link="https://github.com/nness13" isAnimated={true} size={"small"}/>
           </h1>
         </div>

@@ -16,9 +16,9 @@ export const createUser = async (req: Request, res: Response) => {
       role: validRoles[1],
     });
 
-    res.status(201).json(result);
+      return res.status(201).json(result);
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
 
@@ -26,22 +26,22 @@ export const checkUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const result = await userService.checkUser({ email, password });
-    res.json(result);
+    return res.json(result);
   } catch (err: any) {
     console.error("Login error:", err.message);
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
 
 export const getCurrentUser = async (req: Request, res: Response) => {
   try {
     const { token } = req.query as { token?: string };
-    if (!token) return res.status(400).json({ error: "Token is required" });
+    if (!token) return res.status(400).json({ error: "Token is required." });
 
     const user = await userService.getCurrentUser(token);
-    res.json(user);
+    return res.json(user);
   } catch (err: any) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 };
 
@@ -62,9 +62,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
       balance: user.balance,
     }));
 
-    res.json(mappedUsers);
+    return res.json(mappedUsers);
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
 
@@ -74,9 +74,9 @@ export const getUserRole = async (req: Request, res: Response) => {
     if (!token) return res.status(400).json({ error: "Token is required" });
 
     const user = await userService.getUserRole(token) as unknown as UserData;
-    res.json({ role: user.role });
+    return res.json({ role: user.role });
   } catch (err: any) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 };
 
@@ -85,8 +85,8 @@ export const removeUser = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   try {
     const result = await userService.removeUser({ id });
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };

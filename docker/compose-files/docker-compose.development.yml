@@ -1,4 +1,5 @@
 services:
+  ### | PostgresSQL as cleaner Database | ###
   app_postgresql:
     image: postgres:15
     container_name: ${CONTAINER_NAME_POSTGRESQL}
@@ -17,24 +18,7 @@ services:
     env_file:
       - ../../.env
 
-  app_pgadmin:
-    image: dpage/pgadmin4
-    container_name: ${CONTAINER_NAME_PGADMIN}
-    restart: unless-stopped
-    depends_on:
-      - ${CONTAINER_NAME_POSTGRESQL}
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    ports:
-      - "${PGADMIN_PORT}:80"
-    networks:
-      - ${NETWORK_NAME}
-    env_file:
-      - ../../.env
-    volumes:
-      - ../pg-admin-connect/servers.json:/pgadmin4/servers.json:ro
-
+  ### | Web-Server as Express.js library | ###
   app_server:
     build:
       context: ../../server
@@ -53,6 +37,7 @@ services:
     env_file:
       - ../../.env
 
+  ### | Web-Client as React.js framework | ###
   app_client:
     build:
       context: ../../client

@@ -5,12 +5,12 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem;
-  background: $bg-color;
+  background: $background;
   .offerBox {
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    background: $box-bg;
+    background: $background-container;
     color: $text-color;
     border-radius: 1vh;
     gap: 1rem;
@@ -24,7 +24,7 @@
       align-content: baseline;
       padding: 1vh 1vw;
       border-radius: 1vh;
-      background: $box-bg;
+      background: $background-container;
       gap: 0.5rem;
       box-shadow: 0 0 2vh $shadow-color;
       transition: transform 0.3s ease, box-shadow 0.3s ease;

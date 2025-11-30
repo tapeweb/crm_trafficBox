@@ -5,12 +5,12 @@ import { CreateOfferData } from "../types/offer.types";
 export const createOffer = async (data: CreateOfferData) => {
   const { name, description, price, value, token } = data;
 
-  if (!token) throw new Error("Token is required");
+  if (!token) throw new Error("Token is required.");
 
   const user = await getUserService(token);
-  if (!user) throw new Error("User ID not found");
+  if (!user) throw new Error("User ID not found.");
 
-  return prisma.offers.create({
+  return prisma.offer.create({
     data: {
       uid: user.id,
       name: name,
@@ -22,15 +22,15 @@ export const createOffer = async (data: CreateOfferData) => {
 };
 
 export const getOffersByUser = async (userId: number) => {
-  return prisma.offers.findMany({ where: { uid: userId } });
+  return prisma.offer.findMany({ where: { uid: userId } });
 };
 
 export const deleteOffer = async (id: number) => {
-  const deleted = await prisma.offers.deleteMany({ where: { id } });
-  if (deleted.count === 0) throw new Error("Offer not found");
+  const deleted = await prisma.offer.deleteMany({ where: { id } });
+  if (deleted.count === 0) throw new Error("Offer not found.");
 };
 
 
 export const getAllOffers = async () => {
-  return prisma.offers.findMany();
+  return prisma.offer.findMany();
 };

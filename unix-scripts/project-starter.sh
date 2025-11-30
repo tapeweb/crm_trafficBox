@@ -1,12 +1,18 @@
 #!/bin/bash
+set -e
 
-dirs_path=docker/compose-files/docker-compose.development.yml
+set -o allexport
+source .env
+set +o allexport
 
-if [ -f "$dirs_path" ]; then
-  echo "Запускаю контейнеры с файлом: $dirs_path"
+COMPOSE_FILE="./docker/compose-files/docker-compose.${DOCKER_MODE}.yml"
 
-  docker-compose up --build
+if ! docker network ls --format '{{.Name}}' | grep -qw "$NETWORK_NAME"; then
+  echo "Creating network: $NETWORK_NAME"
+  docker network create "$NETWORK_NAME"
 else
-  echo "Файл не найден: $dirs_path"
-  exit 1
+  echo "Network $NETWORK_NAME already exists"
 fi
+
+echo "Starting containers with: $COMPOSE_FILE"
+docker-compose -f "$COMPOSE_FILE" up --build --remove-orphans

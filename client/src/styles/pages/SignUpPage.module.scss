@@ -5,12 +5,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: $box-bg;
+  background: $background-container;
 
   .SignUpBox {
     display: flex;
     flex-direction: column;
-    background: $box-bg;
+    background: $background-container;
     border-radius: 1rem;
     box-shadow: 0 0 2vh $shadow-color;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -48,7 +48,7 @@
       align-items: center;
       gap: 1.5rem;
       padding: 2rem 2rem;
-      background: $box-bg;
+      background: $background-container;
       border-radius: 1rem;
       width: 100%;
       min-height: 500px;
